@@ -6,7 +6,7 @@ import '../../../../widgets/custom_elevated_button.dart';
 import '../../../../widgets/news_box.dart';
 import '../../../news_detail/page.dart';
 
-class DiscoverSubScreen extends GetView<DiscoverSubController> {
+class DiscoverSubScreen extends StatelessWidget {
   const DiscoverSubScreen({super.key});
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class DiscoverSubScreen extends GetView<DiscoverSubController> {
       'Entertainment',
       'Social'
     ];
-    return GetBuilder(
+    return GetBuilder<DiscoverSubController>(
         init: DiscoverSubController(),
-        builder: (value) {
+        builder: (controller) {
           return Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
             child: Column(
@@ -28,7 +28,7 @@ class DiscoverSubScreen extends GetView<DiscoverSubController> {
               children: [
                 const Text(
                   'Discover',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
                 ),
                 Text(
                   'News from all around the world',
@@ -73,9 +73,10 @@ class DiscoverSubScreen extends GetView<DiscoverSubController> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          Get.to(() => const NewsDetail());
+                          Get.to(() => const NewsDetail(source: '', content: '',));
                         },
-                        child: const NewsBox(),
+                        // child: const NewsBox(),
+                        child: Container(),
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) =>

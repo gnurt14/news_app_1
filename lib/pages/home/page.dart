@@ -4,29 +4,35 @@ import 'package:get/get.dart';
 import 'package:news_app/pages/search/page.dart';
 import '../../widgets/vertical_icon_label.dart';
 
-class HomePage extends GetView<HomeController> {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
+    return GetBuilder<HomeController>(
         init: HomeController(),
-        builder: (value) {
+        builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.transparent,
               actions: [
                 IconButton(
                   onPressed: () {
                     Get.to(() => const SearchPage());
                   },
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.search_sharp,
                     size: 28,
-                    color: Colors.black,
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
                   ),
                   style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(const Color(0xff30393C).withOpacity(0.1)),
+                    backgroundColor: Get.isDarkMode
+                        ? WidgetStatePropertyAll(
+                            Colors.white.withOpacity(0.1),
+                          )
+                        : WidgetStatePropertyAll(
+                            const Color(0xff30393C).withOpacity(0.1),
+                          ),
                   ),
                   padding: EdgeInsets.zero,
                 ),
@@ -35,13 +41,19 @@ class HomePage extends GetView<HomeController> {
                   onPressed: () {
                     print('Notification');
                   },
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.notifications_none_outlined,
                     size: 28, // Smaller icon size
-                    color: Colors.black,
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
                   ),
                   style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(const Color(0xff30393C).withOpacity(0.1)),
+                    backgroundColor: Get.isDarkMode
+                        ? WidgetStatePropertyAll(
+                            Colors.white.withOpacity(0.1),
+                          )
+                        : WidgetStatePropertyAll(
+                            const Color(0xff30393C).withOpacity(0.1),
+                          ),
                   ),
                   padding: EdgeInsets.zero, // No padding to keep it tight
                 ),

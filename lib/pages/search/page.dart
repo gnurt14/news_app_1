@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/pages/news_detail/page.dart';
 import 'package:news_app/widgets/custom_elevated_button.dart';
-
 import '../../widgets/news_box.dart';
 import 'controller.dart';
 
-class SearchPage extends GetView<SearchxController> {
+class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
@@ -21,7 +20,7 @@ class SearchPage extends GetView<SearchxController> {
     ];
     return GetBuilder<SearchxController>(
         init: SearchxController(),
-        builder: (value) {
+        builder: (controller) {
           return Scaffold(
             appBar: AppBar(
               leading: IconButton(
@@ -52,7 +51,7 @@ class SearchPage extends GetView<SearchxController> {
                           hintText: 'Search',
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.black.withOpacity(0.3),
+                            color: Get.isDarkMode ? Colors.white.withOpacity(0.6) : Colors.black.withOpacity(0.3),
                           ),
                           border: InputBorder.none,
                         ),
@@ -103,9 +102,10 @@ class SearchPage extends GetView<SearchxController> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            Get.to(() => const NewsDetail());
+                            Get.to(() => const NewsDetail(source: '', content: '',));
                           },
-                          child: const NewsBox(),
+                          // child: const NewsBox(),
+                          child: Container(),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) =>

@@ -4,14 +4,14 @@ import 'package:news_app/widgets/change_mode_button.dart';
 
 import 'controller.dart';
 
-class ChangeModePage extends GetView<ChangeModeController> {
+class ChangeModePage extends StatelessWidget {
   const ChangeModePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
+    return GetBuilder<ChangeModeController>(
       init: ChangeModeController(),
-      builder: (value) {
+      builder: (controller) {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Dark mode'),

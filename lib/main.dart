@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:news_app/pages/home/page.dart';
 import 'package:news_app/router.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart' ;
 
-void main() {
+GetStorage box = GetStorage();
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
+  await GetStorage.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -15,10 +19,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       home: const HomePage(),
       darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.system,
+      themeMode: (box.read('isDarkMode')?? false) ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: generateRoute,
     );
   }
 }
-

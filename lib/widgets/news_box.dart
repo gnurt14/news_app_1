@@ -1,20 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 class NewsBox extends StatelessWidget {
-  const NewsBox({super.key});
+  final String category;
+  final String brief;
+  final String author;
+  final String publishDate;
+
+  const NewsBox({
+    super.key,
+    required this.category,
+    required this.brief,
+    required this.author,
+    required this.publishDate,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 150,
+      width: 150,
       child: Row(
         children: [
-          Container(
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              color: Colors.green,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(32),
+            child: Container(
+              color: Colors.yellow,
+              child: Image.network(
+                'https://thanhnien.mediacdn.vn/uploaded/quanghuy/2020_12_25/rimario-dungphuong_CPEL.jpg',
+                fit: BoxFit.cover,
+                height: 150,
+                width: 150,
+              ),
             ),
           ),
           const SizedBox(
@@ -26,26 +43,32 @@ class NewsBox extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  'Category: Sports',
+                  category,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Get.isDarkMode ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),
+                    color: Get.isDarkMode
+                        ? Colors.white.withOpacity(0.5)
+                        : Colors.black.withOpacity(0.5),
                   ),
                 ),
-                const Text(
-                  'Main content of this recommend ..........',
-                  style: TextStyle(
+                Text(
+                  brief,
+                  maxLines: 4,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 RichText(
                   text: TextSpan(
-                    text: 'Author ',
+                    text: author,
                     style: DefaultTextStyle.of(context).style,
-                    children: const <TextSpan>[
-                      TextSpan(text: '⋆', style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: ' 10/10/2024'),
+                    children: <TextSpan>[
+                      const TextSpan(
+                          text: '⋆',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: ' $publishDate'),
                     ],
                   ),
                 )

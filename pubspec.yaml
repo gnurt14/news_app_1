@@ -41,13 +41,17 @@ dependencies:
 #  youtube_player_flutter:
 #    path: ../../Downloads/3rdparty/youtube_player_flutter-9.0.3
   get: ^4.6.6
+  get_storage: ^2.1.1
+  dio: ^5.7.0
+  html: ^0.15.4
 
 override_dependencies:
-  better_player: ^0.0.84
+  better_player: 0.0.84
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  path_provider_android: 2.2.10
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
