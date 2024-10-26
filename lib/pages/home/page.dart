@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.blue[300],
               actions: [
                 IconButton(
                   onPressed: () {
@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: VerticalIconLabel(
                     icon: Icons.home,
-                    label: 'Home',
+                    label: 'Trang chủ',
                     isSelected: controller.currentIndex.value == 0,
                   ),
                   label: '',
@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: VerticalIconLabel(
                     icon: Icons.navigation,
-                    label: 'Discover',
+                    label: 'Khám phá',
                     isSelected: controller.currentIndex.value == 1,
                   ),
                   label: '',
@@ -82,7 +82,7 @@ class HomePage extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: VerticalIconLabel(
                     icon: Icons.bookmark,
-                    label: 'Saved',
+                    label: 'Đã lưu',
                     isSelected: controller.currentIndex.value == 2,
                   ),
                   label: '',
@@ -90,7 +90,7 @@ class HomePage extends StatelessWidget {
                 BottomNavigationBarItem(
                   icon: VerticalIconLabel(
                     icon: Icons.person,
-                    label: 'User',
+                    label: 'Tôi',
                     isSelected: controller.currentIndex.value == 3,
                   ),
                   label: '',

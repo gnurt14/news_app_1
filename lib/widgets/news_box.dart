@@ -62,13 +62,25 @@ class NewsBox extends StatelessWidget {
                 ),
                 RichText(
                   text: TextSpan(
-                    text: author,
-                    style: DefaultTextStyle.of(context).style,
+                    text: author.trim().isNotEmpty ? author : 'unknown',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Get.isDarkMode ? Colors.white.withOpacity(0.4) : Colors.black.withOpacity(0.4),
+                    ),
                     children: <TextSpan>[
                       const TextSpan(
-                          text: '⋆',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: ' $publishDate'),
+                        text: ' ⋆',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: ' $publishDate',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Get.isDarkMode ? Colors.white.withOpacity(0.4) : Colors.black.withOpacity(0.4),
+                        ),
+                      ),
                     ],
                   ),
                 )

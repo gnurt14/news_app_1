@@ -1,71 +1,168 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/pages/home/sub_screen/sub_user/controller.dart';
-
-import 'change_theme_mode/page.dart';
+import 'package:news_app/pages/home/controller.dart';
 
 class UserSubScreen extends StatelessWidget {
   const UserSubScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserSubController>(
-        init: UserSubController(),
-        builder: (value) {
+    return GetBuilder<HomeController>(
+        init: HomeController(),
+        builder: (controller) {
           return Scaffold(
             body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      const CircleAvatar(
-                        radius: 48,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Nguyen Huu Trung',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => const ChangeModePage());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 40.0),
-                          backgroundColor: Colors.white,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 200,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 16.0,
+                              horizontal: 8.0,
+                            ),
+                            child: Column(
+                              children: [
+                                controller.isLogin
+                                    ? const Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 48,
+                                            backgroundImage: NetworkImage(
+                                              'https://editorial.uefa.com/resources/0250-0c5117b83a72-956867b9220c-1000/format/wide1/cristiano_ronaldo_celebrates_his_fifth_title.jpeg',
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            'Cristiano Ronaldo',
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 48,
+                                            child: Image.network(
+                                                'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'),
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Text('Bạn chưa '),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  print('Đăng nhập');
+                                                },
+                                                child: const Text(
+                                                  'Đăng nhập',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.blue,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Text(
+                                                  'Bạn chưa có tài khoản? '),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  print('Đăng ký');
+                                                },
+                                                child: const Text(
+                                                  'Đăng ký ngay',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.blue,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                              ],
+                            ),
+                          ),
                         ),
-                        child: const Text(
-                          'Dark mode',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        const SizedBox(
+                          height: 20,
                         ),
-                      ),
-                    ],
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      print('Log out');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 40.0),
-                      backgroundColor: Colors.white,
+                        Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24.0),
+                            color: controller.switchMode.value
+                                ? Colors.grey.withOpacity(0.2)
+                                : Colors.blue,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Chế độ tối',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                Switch(
+                                  activeTrackColor: Colors.white,
+                                  activeColor: Colors.green,
+                                  value: controller.switchMode.value,
+                                  onChanged: (value) {
+                                    controller.changeThemeMode();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    child: const Text(
-                      'Log out',
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                    controller.isLogin
+                        ? ElevatedButton(
+                            onPressed: () {
+                              print('Log out');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(double.infinity, 40.0),
+                              backgroundColor: Colors.white,
+                            ),
+                            child: const Text(
+                              'Đăng xuất',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.black),
+                            ),
+                          )
+                        : Container(),
+                  ],
+                )),
           );
         });
   }

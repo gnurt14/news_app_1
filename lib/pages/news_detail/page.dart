@@ -1,19 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:news_app/pages/news_detail/controller.dart';
-import 'package:get/get.dart';
 import 'package:html/parser.dart';
+import 'package:news_app/models/article.dart';
+import 'package:news_app/pages/home/controller.dart';
+import 'package:get/get.dart';
 
-class NewsDetail extends GetView<NewsController> {
-  final String source;
-  final String content;
+class NewsDetail extends StatelessWidget {
+  final Article article;
 
-  const NewsDetail({super.key, required this.source, required this.content});
+  const NewsDetail({
+    super.key,
+    required this.article,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NewsController>(
-      init: NewsController(),
-      builder: (value) {
+    return GetBuilder<HomeController>(
+      init: HomeController(),
+      builder: (controller) {
         return Scaffold(
           body: CustomScrollView(
             slivers: <Widget>[
@@ -37,9 +42,10 @@ class NewsDetail extends GetView<NewsController> {
                   IconButton(
                     onPressed: () {
                       print('Bookmark');
+                      controller.addToSavedList(article);
                     },
-                    icon: const Icon(
-                      Icons.bookmark_border,
+                    icon: Icon(
+                      article.isBookMark ? Icons.bookmark : Icons.bookmark_border,
                       size: 32, // Smaller icon size
                       color: Colors.white,
                     ),
@@ -67,30 +73,23 @@ class NewsDetail extends GetView<NewsController> {
                 ],
                 elevation: 0,
                 bottom: PreferredSize(
-                  preferredSize: Size(0, AppBar().preferredSize.height),
+                  preferredSize: Size(0, AppBar().preferredSize.height * 1.2),
                   child: Container(
                     width: double.maxFinite,
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CircleAvatar(
-                          radius: 24,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
                         Text(
-                          source,
+                          article.title,
+                          maxLines: 3,
                           style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Icon(
-                          Icons.verified,
-                          color: Colors.blue,
-                        ),
+                        Text('${article.author.trim().isNotEmpty ? article.author : 'unknown'} - ${article.publishDate}'),
                       ],
                     ),
                   ),
@@ -98,10 +97,22 @@ class NewsDetail extends GetView<NewsController> {
                 pinned: true,
                 expandedHeight: 300,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.network(
-                    'https://thanhnien.mediacdn.vn/uploaded/quanghuy/2020_12_25/rimario-dungphuong_CPEL.jpg',
-                    fit: BoxFit.cover,
-                    height: 300,
+                  background: ShaderMask(
+                    shaderCallback: (rect) {
+                      return const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.black, Colors.transparent],
+                      ).createShader(
+                        Rect.fromLTRB(0, 0, rect.width, rect.height),
+                      );
+                    },
+                    blendMode: BlendMode.dstIn,
+                    child: Image.network(
+                      'https://thanhnien.mediacdn.vn/uploaded/quanghuy/2020_12_25/rimario-dungphuong_CPEL.jpg',
+                      fit: BoxFit.cover,
+                      height: 300,
+                    ),
                   ),
                 ),
               ),
@@ -110,12 +121,29 @@ class NewsDetail extends GetView<NewsController> {
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
                   ),
-                  child: Text(
-                    parse(content).outerHtml,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Get.isDarkMode ? Colors.white : Colors.black),
+                  child: Column(
+                    children: [
+                      Text(
+                        parse(article.content).body!.text,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color:
+                                Get.isDarkMode ? Colors.white : Colors.black),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            'Nguồn: ${article.source}',
+                            style: const TextStyle(
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               )

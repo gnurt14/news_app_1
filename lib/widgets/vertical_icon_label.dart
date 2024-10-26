@@ -32,7 +32,7 @@ class VerticalIconLabel extends StatelessWidget {
               ),
               if (isSelected)
                 Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Text(
                     label,
                     style: TextStyle(

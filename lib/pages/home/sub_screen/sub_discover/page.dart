@@ -1,41 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/pages/home/sub_screen/sub_discover/controller.dart';
+import 'package:news_app/pages/home/controller.dart';
+import 'package:news_app/pages/news_detail/page.dart';
+import 'package:news_app/widgets/news_box.dart';
 
 import '../../../../widgets/custom_elevated_button.dart';
-import '../../../../widgets/news_box.dart';
-import '../../../news_detail/page.dart';
 
 class DiscoverSubScreen extends StatelessWidget {
   const DiscoverSubScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     List<String> listNews = [
-      'All',
-      'Politic',
-      'Sport',
-      'Education',
-      'Entertainment',
-      'Social'
+      'Tất cả',
+      'Chính trị',
+      'Kinh tế',
+      'Thể thao',
+      'Giáo dục',
+      'Giải trí'
     ];
-    return GetBuilder<DiscoverSubController>(
-        init: DiscoverSubController(),
+    return GetBuilder<HomeController>(
+        init: HomeController(),
         builder: (controller) {
           return Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+            padding:
+                const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Discover',
+                  'Khám phá',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
                 ),
                 Text(
-                  'News from all around the world',
+                  'Khám phá tin tức trên toàn thế giới ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
-                    color: Get.isDarkMode ? Colors.white.withOpacity(0.4) : Colors.black.withOpacity(0.3) ,
+                    color: Get.isDarkMode
+                        ? Colors.white.withOpacity(0.4)
+                        : Colors.black.withOpacity(0.3),
                   ),
                 ),
                 const SizedBox(
@@ -47,41 +51,48 @@ class DiscoverSubScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return CustomElevatedButton(
-                        isSelected: controller.currentIndex.value == index,
+                        isSelected:
+                            controller.currentDiscoverIndex.value == index,
                         label: listNews[index],
                         onPress: () {
                           controller.updateIndexElevatedButton(index);
+                          controller.getNewsByFilter(listNews[index]);
                         },
                       );
                     },
-                    separatorBuilder: (context, index) => const SizedBox(
-                      width: 6,
-                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 6),
                     itemCount: listNews.length,
                   ),
                 ),
-                // Custom Tab
 
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 10,),
 
                 // List of news
                 Expanded(
-                  child: ListView.separated(
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Get.to(() => const NewsDetail(source: '', content: '',));
-                        },
-                        // child: const NewsBox(),
-                        child: Container(),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox(height: 10),
-                  ),
+                  child: Obx(() {
+                    var filteredNews = controller.getNewsByFilter(
+                        listNews[controller.currentDiscoverIndex.value]);
+                    return ListView.separated(
+                      itemCount: filteredNews.length,
+                      itemBuilder: (context, index) {
+                        var article = filteredNews[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(() => NewsDetail(article: article));
+                          },
+                          child: NewsBox(
+                            category: article.categoryTitle,
+                            brief: article.brief,
+                            author: article.author,
+                            publishDate: article.publishDate,
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 10),
+                    );
+                  }),
                 ),
               ],
             ),

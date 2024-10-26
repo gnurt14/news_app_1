@@ -11,12 +11,12 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> listNews = [
-      'All',
-      'Politic',
-      'Sport',
-      'Education',
-      'Entertainment',
-      'Social'
+      'Tất cả',
+      'Chính trị',
+      'Kinh tế',
+      'Thể thao',
+      'Giáo dục',
+      'Giải trí'
     ];
     return GetBuilder<SearchxController>(
         init: SearchxController(),
@@ -48,7 +48,7 @@ class SearchPage extends StatelessWidget {
                       child: TextField(
                         decoration: InputDecoration(
                           focusedBorder: InputBorder.none,
-                          hintText: 'Search',
+                          hintText: 'Tìm kiếm',
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Get.isDarkMode ? Colors.white.withOpacity(0.6) : Colors.black.withOpacity(0.3),
@@ -96,22 +96,22 @@ class SearchPage extends StatelessWidget {
                   ),
 
                   // List of news
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Get.to(() => const NewsDetail(source: '', content: '',));
-                          },
-                          // child: const NewsBox(),
-                          child: Container(),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(height: 10),
-                    ),
-                  ),
+                  // Expanded(
+                  //   child: ListView.separated(
+                  //     itemCount: 5,
+                  //     itemBuilder: (context, index) {
+                  //       return GestureDetector(
+                  //         onTap: () {
+                  //           Get.to(() => const NewsDetail(article: null,),);
+                  //         },
+                  //         // child: const NewsBox(),
+                  //         child: Container(),
+                  //       );
+                  //     },
+                  //     separatorBuilder: (BuildContext context, int index) =>
+                  //         const SizedBox(height: 10),
+                  //   ),
+                  // ),
                   // List of news
                 ],
               ),

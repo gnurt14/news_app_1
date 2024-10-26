@@ -25,6 +25,7 @@ class Article {
   final String categoryTitle;
   final String publishDate;
   final int totalWords;
+  bool isBookMark;
 
   Article({
     required this.createdTime,
@@ -51,6 +52,7 @@ class Article {
     required this.categoryTitle,
     required this.publishDate,
     required this.totalWords,
+    this.isBookMark = false,
   });
 
   factory Article.fromJson(String str) => Article.fromMap(json.decode(str));
