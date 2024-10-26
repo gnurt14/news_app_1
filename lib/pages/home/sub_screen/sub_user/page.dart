@@ -21,7 +21,7 @@ class UserSubScreen extends StatelessWidget {
                     Column(
                       children: [
                         SizedBox(
-                          height: 200,
+                          height: 240,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               vertical: 16.0,
@@ -30,22 +30,48 @@ class UserSubScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 controller.isLogin
-                                    ? const Column(
+                                    ? Column(
                                         children: [
-                                          CircleAvatar(
+                                          const CircleAvatar(
                                             radius: 48,
                                             backgroundImage: NetworkImage(
                                               'https://editorial.uefa.com/resources/0250-0c5117b83a72-956867b9220c-1000/format/wide1/cristiano_ronaldo_celebrates_his_fifth_title.jpeg',
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 20,
                                           ),
-                                          Text(
+                                          const Text(
                                             'Cristiano Ronaldo',
                                             style: TextStyle(
                                               fontSize: 24,
                                               fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          InkWell(
+                                            onTap: (){
+                                              print('Edit account information');
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Chỉnh sửa thông tin tài khoản',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12,
+                                                    color: controller.switchMode.value ? Colors.white : Colors.blue,
+                                                  ),
+                                                ),
+                                                Icon(
+                                                  Icons.edit,
+                                                  color: controller.switchMode.value ? Colors.white : Colors.blue,
+                                                  size: 20,
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ],
