@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/pages/news_detail/page.dart';
 import 'package:news_app/widgets/custom_elevated_button.dart';
-import '../../widgets/news_box.dart';
 import 'controller.dart';
 
 class SearchPage extends StatelessWidget {

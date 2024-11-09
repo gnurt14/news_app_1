@@ -78,7 +78,6 @@ class HomeController extends GetxController {
         Map jsonData = jsonDecode(response.data)['items'];
         jsonData.forEach((key, value) {
           articlesList.add(Article.fromMap(value));
-          print(value.toString());
         });
       } else {
         print(response.statusCode);
@@ -164,6 +163,7 @@ class HomeController extends GetxController {
         'nameOfThisUser',
         savedList.map((article) => article.toJson()).toList(),
       );
+
       update();
     } else {
       Get.snackbar(
@@ -196,12 +196,18 @@ class HomeController extends GetxController {
 
   void loadSavedArticles(){
     final savedData = boxSavedArticle.read('nameOfThisUser') ?? [];
-    if (savedData is List) {
-      savedList.addAll(
-          savedData.map((item) => Article.fromJson(item as String)).toList());
+    if(savedData is List){
+      final savedArticles = savedData.map((item) => Article.fromJson(item as String)).toList();
+      savedList.assignAll(savedArticles);
+      for(var article in savedList){
+        article.isBookMark = true;
+      }
+
+      final savedArticleIds = savedList.map((articles) => articles.id).toSet();
+      for(var article in articlesList){
+        article.isBookMark = savedArticleIds.contains(article.id);
+      }
     }
-    for(var i in savedList){
-      i.isBookMark = true;
-    }
+    update();
   }
 }

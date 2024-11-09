@@ -36,18 +36,23 @@ dependencies:
   cupertino_icons: ^1.0.8
   carousel_slider: ^5.0.0
   cookie_jar: ^4.0.8
-#  vhv_basic:
-#    path: ../../Downloads/vhv/basic
-#  youtube_player_flutter:
-#    path: ../../Downloads/3rdparty/youtube_player_flutter-9.0.3
   get: ^4.6.6
   get_storage: ^2.1.1
   dio: ^5.7.0
   html: ^0.15.4
   diacritic: ^0.1.6
-
-override_dependencies:
-  better_player: 0.0.84
+  smooth_page_indicator: ^1.2.0+3
+  deferred-components:
+    - name: feature1
+      libraries:
+        - lib/feature1.dart
+      assets:
+        - assets/feature1/
+#  vhv_basic:
+#    path: ../vhv/basic
+dependency_overrides:
+  flutter_layout_grid: ^2.0.7
+  package_info_plus: ^8.1.0
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +63,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

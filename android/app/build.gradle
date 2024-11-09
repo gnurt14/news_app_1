@@ -7,8 +7,10 @@ plugins {
 
 android {
     namespace = "com.example.news_app"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdkVersion 34
+    ndkVersion "25.1.8937393"
+
+    dynamicFeatures = [":feature1"]
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -24,8 +26,8 @@ android {
         applicationId = "com.example.news_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdkVersion 24
+        targetSdkVersion 34
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled true
@@ -36,10 +38,15 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
         }
     }
 }
 
+dependencies {
+    api 'com.google.android.play:core-ktx:1.8.1'
+}
 flutter {
     source = "../.."
 }
