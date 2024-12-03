@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "593685059508",
+    "project_id": "my-clone-ig",
+    "storage_bucket": "my-clone-ig.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593685059508:android:248e851ffb8fc3c93d44e1",
+        "android_client_info": {
+          "package_name": "com.example.news_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAPc7EswSRVIIrssFayCl1gppANB00svw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

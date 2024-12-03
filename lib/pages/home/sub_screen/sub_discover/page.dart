@@ -86,6 +86,7 @@ class DiscoverSubScreen extends StatelessWidget {
                             brief: article.brief,
                             author: article.author,
                             publishDate: article.publishDate,
+                            image: article.image,
                           ),
                         );
                       },

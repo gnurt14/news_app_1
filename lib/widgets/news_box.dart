@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../global.dart';
+
 class NewsBox extends StatelessWidget {
   final String category;
   final String brief;
   final String author;
   final String publishDate;
+  final String image;
 
   const NewsBox({
     super.key,
@@ -13,6 +16,7 @@ class NewsBox extends StatelessWidget {
     required this.brief,
     required this.author,
     required this.publishDate,
+    required this.image,
   });
 
   @override
@@ -27,7 +31,8 @@ class NewsBox extends StatelessWidget {
             child: Container(
               color: Colors.yellow,
               child: Image.network(
-                'https://thanhnien.mediacdn.vn/uploaded/quanghuy/2020_12_25/rimario-dungphuong_CPEL.jpg',
+                // 'https://thanhnien.mediacdn.vn/uploaded/quanghuy/2020_12_25/rimario-dungphuong_CPEL.jpg',
+                '$domain$image',
                 fit: BoxFit.cover,
                 height: 150,
                 width: 150,

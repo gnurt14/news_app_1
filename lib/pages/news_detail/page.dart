@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
+import 'package:news_app/global.dart';
 import 'package:news_app/models/article.dart';
 import 'package:news_app/pages/home/controller.dart';
 import 'package:get/get.dart';
@@ -107,7 +108,8 @@ class NewsDetail extends StatelessWidget {
                     },
                     blendMode: BlendMode.dstIn,
                     child: Image.network(
-                      'https://thanhnien.mediacdn.vn/uploaded/quanghuy/2020_12_25/rimario-dungphuong_CPEL.jpg',
+                      // 'https://thanhnien.mediacdn.vn/uploaded/quanghuy/2020_12_25/rimario-dungphuong_CPEL.jpg',
+                      '$domain${article.image}',
                       fit: BoxFit.cover,
                       height: 300,
                     ),

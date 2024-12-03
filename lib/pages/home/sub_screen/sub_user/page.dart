@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/global.dart';
+import 'package:news_app/pages/auth/login/page.dart';
 import 'package:news_app/pages/home/controller.dart';
+import 'package:news_app/pages/home/sub_screen/sub_user/edit/page.dart';
 
 class UserSubScreen extends StatelessWidget {
   const UserSubScreen({super.key});
@@ -29,7 +32,7 @@ class UserSubScreen extends StatelessWidget {
                             ),
                             child: Column(
                               children: [
-                                controller.isLogin
+                                isLogin
                                     ? Column(
                                         children: [
                                           const CircleAvatar(
@@ -54,6 +57,7 @@ class UserSubScreen extends StatelessWidget {
                                           InkWell(
                                             onTap: (){
                                               print('Edit account information');
+                                              Get.to(() => UserSubScreenEdit());
                                             },
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
@@ -171,10 +175,10 @@ class UserSubScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    controller.isLogin
+                    isLogin
                         ? ElevatedButton(
                             onPressed: () {
-                              print('Log out');
+                              Get.to(() => LoginPage());
                             },
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size(double.infinity, 40.0),

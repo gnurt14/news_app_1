@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/global.dart';
 import 'package:news_app/pages/home/controller.dart';
 import 'package:news_app/pages/news_detail/page.dart';
 import 'package:news_app/widgets/news_box.dart';
@@ -24,7 +25,7 @@ class SavedSubScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              controller.isLogin
+              isLogin
                   ? (controller.savedList.isNotEmpty
                       ? Expanded(
                           child: ListView.separated(
@@ -44,6 +45,7 @@ class SavedSubScreen extends StatelessWidget {
                                   author: controller.savedList[index].author,
                                   publishDate:
                                       controller.savedList[index].publishDate,
+                                  image: controller.savedList[index].image,
                                 ),
                               );
                             },

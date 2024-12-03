@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:news_app/global.dart';
 import 'package:news_app/pages/home/sub_screen/sub_discover/page.dart';
 import 'package:news_app/pages/home/sub_screen/sub_home/page.dart';
 import 'package:news_app/pages/home/sub_screen/sub_saved/page.dart';
@@ -27,8 +28,6 @@ class HomeController extends GetxController {
   var articlesList = <Article>[].obs;
   var savedList = <Article>[].obs;
   var switchMode = false.obs;
-
-  bool isLogin = true;
 
   final box = GetStorage();
   final boxSavedArticle = GetStorage();
